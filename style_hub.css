@@ -23,7 +23,11 @@ body[data-theme="light"] {
     --primary-blue: #0288d1;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
 
 body {
     background-color: var(--bg-main);
@@ -35,25 +39,81 @@ body {
     min-height: 100vh;
 }
 
-.hub-container { width: 100%; max-width: 1100px; }
-
-/* --- ENCABEZADO --- */
-.hub-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 30px; background: var(--bg-card); padding: 24px; border-radius: 24px;
-    border: 1px solid var(--border-color); box-shadow: 0 4px 20px var(--shadow);
+.hub-container { 
+    width: 100%; 
+    max-width: 1100px; 
 }
-.hub-profile { display: flex; align-items: center; gap: 16px; }
-.hub-avatar { font-size: 2.5rem; background: var(--bg-main); padding: 10px; border-radius: 16px; border: 1px solid var(--border-color); }
+
+/* --- ENCABEZADO CORREGIDO PARA MÓVILES (FLEX-WRAP) --- */
+.hub-header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 30px; 
+    background: var(--bg-card); 
+    padding: 24px; 
+    border-radius: 24px;
+    border: 1px solid var(--border-color); 
+    box-shadow: 0 4px 20px var(--shadow);
+    flex-wrap: wrap;        /* Evita colapsos en pantallas angostas */
+    gap: 16px;              /* Margen de seguridad entre componentes */
+}
+
+.hub-profile { 
+    display: flex; 
+    align-items: center; 
+    gap: 16px; 
+    flex: 1;
+    min-width: 200px;       /* Protege el espacio del título */
+}
+
+.hub-avatar { 
+    font-size: 2.5rem; 
+    background: var(--bg-main); 
+    padding: 10px; 
+    border-radius: 16px; 
+    border: 1px solid var(--border-color); 
+}
 
 /* --- INTERRUPTOR DE TEMA --- */
-.theme-switch-container { display: flex; align-items: center; }
-.switch-row { display: flex; align-items: center; gap: 10px; }
-.theme-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
-.switch { position: relative; display: inline-block; width: 44px; height: 24px; }
-.switch input { opacity: 0; width: 0; height: 0; }
-.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #64748b; transition: .3s; }
-.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .3s; }
+.theme-switch-container { 
+    display: flex; 
+    align-items: center; 
+}
+
+.switch-row { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.theme-label { 
+    font-size: 0.85rem; 
+    color: var(--text-muted); 
+    font-weight: 600; 
+}
+
+.switch { 
+    position: relative; 
+    display: inline-block; 
+    width: 44px; 
+    height: 24px; 
+}
+
+.switch input { 
+    opacity: 0; width: 0; height: 0; 
+}
+
+.slider { 
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; 
+    background-color: #64748b; transition: .3s; 
+}
+
+.slider:before { 
+    position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; 
+    background-color: white; transition: .3s; 
+}
+
 input:checked + .slider { background-color: var(--primary-blue); }
 input:checked + .slider:before { transform: translateX(20px); }
 .slider.round { border-radius: 34px; }
@@ -80,38 +140,134 @@ input:checked + .slider:before { transform: translateX(20px); }
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* Distribución asimétrica de bloques */
-.card-welcome { grid-column: span 3; background: linear-gradient(135deg, var(--bg-card) 60%, rgba(56, 189, 248, 0.05) 100%); }
-.card-welcome h2 { font-size: 1.6rem; margin-bottom: 8px; color: var(--primary-blue); }
-.card-welcome p { color: var(--text-muted); line-height: 1.6; max-width: 800px; }
-
-.tech-stack-badges { display: flex; gap: 10px; margin-top: 16px; }
-.badge { background: var(--bg-main); border: 1px solid var(--border-color); padding: 6px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
-
-/* --- CONTROLES DE LANZAMIENTO (LAUNCHERS) --- */
-.app-launcher-card { min-height: 200px; cursor: pointer; }
-.app-card-header { display: flex; justify-content: space-between; align-items: center; }
-.app-icon { font-size: 2.5rem; }
-.launcher-arrow { font-size: 1.2rem; color: var(--text-muted); transition: transform 0.3s ease, color 0.3s ease; }
-.app-card-body { margin-top: 20px; }
-.app-card-body h3 { font-size: 1.4rem; margin-bottom: 8px; font-weight: 700; }
-.app-card-body p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
-
-/* Efectos hover individuales temáticos (Glows personalizados) */
-.app-launcher-card:hover {
-    transform: translateY(-50% 10px) translateY(-5px);
+/* Tarjeta de bienvenida */
+.card-welcome { 
+    grid-column: span 3; 
+    background: linear-gradient(135deg, var(--bg-card) 60%, rgba(56, 189, 248, 0.05) 100%); 
 }
-.app-launcher-card:hover .launcher-arrow { transform: translateX(5px); color: var(--text-main); }
+
+.card-welcome h2 { 
+    font-size: 1.6rem; 
+    margin-bottom: 8px; 
+    color: var(--primary-blue); 
+}
+
+.card-welcome p { 
+    color: var(--text-muted); 
+    line-height: 1.6; 
+    max-width: 800px; 
+}
+
+/* --- SOLUCIÓN DE DESBORDE DE BADGES (FLEX-WRAP) --- */
+.tech-stack-badges { 
+    display: flex; 
+    gap: 8px; 
+    margin-top: 16px; 
+    flex-wrap: wrap;        /* Fuerza el salto de línea si toca el límite lateral */
+}
+
+.badge { 
+    background: var(--bg-main); 
+    border: 1px solid var(--border-color); 
+    padding: 6px 12px; 
+    border-radius: 12px; 
+    font-size: 0.75rem; 
+    font-weight: 700; 
+    color: var(--text-muted); 
+}
+
+/* --- TARJETAS LANZADORES DE APLICACIONES --- */
+.app-launcher-card { 
+    min-height: 200px; 
+    cursor: pointer; 
+}
+
+.app-card-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.app-icon { 
+    font-size: 2.5rem; 
+}
+
+.launcher-arrow { 
+    font-size: 1.2rem; 
+    color: var(--text-muted); 
+    transition: transform 0.3s ease, color 0.3s ease; 
+}
+
+.app-card-body { 
+    margin-top: 20px; 
+}
+
+.app-card-body h3 { 
+    font-size: 1.4rem; 
+    margin-bottom: 8px; 
+    font-weight: 700; 
+}
+
+.app-card-body p { 
+    font-size: 0.9rem; 
+    color: var(--text-muted); 
+    line-height: 1.5; 
+}
+
+/* Animaciones y Estados Hover Temáticos */
+.app-launcher-card:hover {
+    transform: translateY(-5px);
+}
+
+.app-launcher-card:hover .launcher-arrow { 
+    transform: translateX(5px); 
+    color: var(--text-main); 
+}
 
 .glucu-theme:hover { border-color: #f43f5e; box-shadow: 0 12px 30px rgba(244, 63, 94, 0.15); }
 .baby-theme:hover { border-color: #6366f1; box-shadow: 0 12px 30px rgba(99, 102, 241, 0.15); }
 .sleep-theme:hover { border-color: #38bdf8; box-shadow: 0 12px 30px rgba(56, 189, 248, 0.15); }
 
-/* --- FOOTER --- */
-.hub-footer { text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 0.85rem; }
+/* --- PIE DE PÁGINA --- */
+.hub-footer { 
+    text-align: center; 
+    margin-top: 40px; 
+    color: var(--text-muted); 
+    font-size: 0.85rem; 
+}
 
-/* --- RESPONSIVE --- */
+/* ==========================================================================
+   ADAPTACIÓN ESTRICTA PARA PANTALLAS TÁCTILES Y MÓVILES (IPHONE CORREGIDO)
+   ========================================================================== */
 @media (max-width: 900px) {
-    .hub-bento-grid { grid-template-columns: 1fr; }
-    .card-welcome { grid-column: span 1; }
+    body {
+        padding: 16px 12px; /* Reduce los espacios externos laterales en el smartphone */
+    }
+
+    .hub-bento-grid { 
+        grid-template-columns: 1fr; /* Colapsa la matriz a una sola columna vertical */
+        gap: 16px; 
+    }
+
+    .card-welcome { 
+        grid-column: span 1; 
+    }
+
+    /* Ajustes proporcionales para optimizar espacio en el header móvil */
+    .hub-header {
+        padding: 16px;
+    }
+
+    .hub-header h1 {
+        font-size: 1.3rem;
+    }
+    
+    .hub-avatar {
+        font-size: 2rem;
+        padding: 8px;
+    }
+
+    .hub-card {
+        padding: 20px; /* Hace los bloques Bento más compactos en móvil */
+    }
 }
