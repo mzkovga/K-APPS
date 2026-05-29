@@ -1,0 +1,205 @@
+/* assets/css/style.css */
+
+:root {
+    /* Paleta Modo Claro (Estilo Bento UI: colores pastel suaves, alto contraste en texto) */
+    --bg-color: #f4f5f7;
+    --card-bg: #ffffff;
+    --text-primary: #1a1a2e;
+    --text-secondary: #6e6e80;
+    --border-color: #e1e4e8;
+    --accent-color: #ff7e67; /* Naranja suave similar a las referencias */
+    --accent-hover: #ff6b52;
+    --success-color: #4cd137;
+    --danger-color: #e84118;
+    --card-radius: 24px;
+    --btn-radius: 16px;
+    --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    /* Paleta Modo Oscuro */
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --border-color: #333333;
+    --accent-color: #ff9f89;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    transition: background-color var(--transition), color var(--transition);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Sistema Bento UI (Tarjetas Modulares) --- */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.bento-card {
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: var(--card-radius);
+    padding: 24px;
+    transition: transform var(--transition), box-shadow var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* --- Formularios y Botones --- */
+.form-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    padding: 12px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--accent-color);
+}
+
+.btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: var(--btn-radius);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    border-color: var(--text-primary);
+}
+
+/* --- Layouts Específicos --- */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.auth-card {
+    max-width: 400px;
+    width: 100%;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.auth-header h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.toggle-auth {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.toggle-auth span {
+    color: var(--accent-color);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.error-message {
+    color: var(--danger-color);
+    font-size: 0.85rem;
+    margin-top: 8px;
+    text-align: center;
+    display: none;
+    font-weight: bold;
+}
+
+/* --- BOTÓN DE RETORNO AL HUB (EDICIÓN BABYKICK-TRACK) --- */
+.btn-back-hub {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease, transform 0.1s ease;
+}
+
+.btn-back-hub:hover {
+    color: #6366f1; /* Índigo/Morado característico de BabyKick-Track */
+    border-color: #6366f1;
+    background-color: rgba(99, 102, 241, 0.03);
+}
+
+body[data-theme="light"] .btn-back-hub:hover {
+    background-color: rgba(99, 102, 241, 0.05);
+}
+
+.btn-back-hub:active {
+    transform: scale(0.98);
+}
