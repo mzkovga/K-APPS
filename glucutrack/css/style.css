@@ -221,3 +221,35 @@ th { color: var(--text-muted); font-weight: 600; font-size: 0.9rem;}
         gap: 15px;
     }
 }
+
+/* --- BOTÓN DE RETORNO AL HUB (EDICIÓN GLUCUTRACK) --- */
+.btn-back-hub {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease, transform 0.1s ease;
+}
+
+.btn-back-hub:hover {
+    color: #f43f5e; /* Rojo/Carmesí dinámico de GlucuTrack */
+    border-color: #f43f5e;
+    background-color: rgba(244, 63, 94, 0.03);
+}
+
+body[data-theme="light"] .btn-back-hub:hover {
+    background-color: rgba(244, 63, 94, 0.05);
+}
+
+.btn-back-hub:active {
+    transform: scale(0.98);
+}
