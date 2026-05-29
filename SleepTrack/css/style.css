@@ -1,0 +1,786 @@
+/* ==========================================================================
+   VARIABLES DE COLOR Y TEMAS (MODO OSCURO POR DEFECTO / MODO CLARO)
+   ========================================================================== */
+
+/* Variables para Modo Oscuro (Noche Profunda - Por Defecto) */
+body {
+    --bg-main: #0b0f19;         /* Negro azulado profundo */
+    --bg-card: #161f30;         /* Gris pizarra nocturno */
+    --bg-metric: #1e293b;       /* Bloque de métrica intermedio */
+    --text-main: #f8fafc;       /* Blanco puro */
+    --text-muted: #94a3b8;      /* Gris plata */
+    --primary-blue: #38bdf8;    /* Celeste brillante */
+    --slate-button: #475569;    /* Gris Pizarra Neutral */
+    --border-color: #2e3b4e;    /* Borde oscuro sutil */
+    --input-bg: #0b0f19;        /* Fondo del input */
+    --danger: #ef4444;          /* Rojo alerta */
+    --shadow: rgba(0, 0, 0, 0.4);
+    
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Variables para Modo Claro (Cielo Eléctrico) */
+body[data-theme="light"] {
+    --bg-main: #f1f5f9;         /* Fondo gris perla muy claro */
+    --bg-card: #ffffff;         /* Tarjetas blancas puras */
+    --bg-metric: #f8fafc;       /* Bloque de métrica claro */
+    --text-main: #0f172a;       /* Texto negro pizarra */
+    --text-muted: #64748b;      /* Gris intermedio */
+    --primary-blue: #0288d1;    /* Azul cielo intenso corporativo */
+    --slate-button: #64748b;    /* Gris pizarra medio */
+    --border-color: #e2e8f0;    /* Borde claro suave */
+    --input-bg: #f8fafc;        /* Fondo del input claro */
+    --shadow: rgba(15, 23, 42, 0.06);
+}
+
+/* --- REGLAS GENERALES --- */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   ESTILOS COMPLETOS DE LA PANTALLA DE LOGIN
+   ========================================================================== */
+.login-body {
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+}
+
+.mesh-gradient { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 0; 
+}
+
+.blob { 
+    position: absolute; 
+    width: 500px; 
+    height: 500px; 
+    filter: blur(90px); 
+    opacity: 0.25; 
+    border-radius: 50%; 
+    transition: background-color 0.4s ease;
+}
+
+.blob-slate { background: var(--slate-button); top: -50px; right: -50px; }
+.blob-blue { background: var(--primary-blue); bottom: -50px; left: -50px; }
+
+.login-card.glass {
+    position: relative; 
+    z-index: 1;
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    padding: 40px; 
+    border-radius: 20px;
+    width: 100%; 
+    max-width: 400px; 
+    text-align: center;
+    box-shadow: 0 20px 40px var(--shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.emoji-container { font-size: 3rem; margin-bottom: 10px; }
+.subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
+
+.btn-login {
+    background: var(--slate-button); 
+    color: white; 
+    border: none; 
+    padding: 14px;
+    border-radius: 12px; 
+    font-weight: 600; 
+    font-size: 1rem; 
+    width: 100%; 
+    cursor: pointer; 
+    margin-top: 10px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-login:hover { background: #334155; }
+.btn-login:active { transform: scale(0.98); }
+
+/* ==========================================================================
+   ESTILOS DEL DASHBOARD (LAYOUT BENTO ASIMÉTRICO RIGUROSO)
+   ========================================================================== */
+.app-container { 
+    width: 100%; 
+    max-width: 1240px; 
+}
+
+.app-header {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 24px; 
+    background: var(--bg-card); 
+    padding: 20px; 
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.profile-section { display: flex; align-items: center; gap: 14px; }
+.avatar-icon {
+    font-size: 2.2rem;
+    width: 50px;          /* Forzamos un ancho fijo para el contenedor */
+    height: 50px;         /* Forzamos un alto fijo para el contenedor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;   /* Si quieres que el contenedor sea circular */
+    overflow: hidden;     /* Corta cualquier parte de la imagen que se salga */
+}
+
+/* Nueva clase elástica para controlar tu imagen personalizada */
+.custom-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* Hace que la imagen llene el espacio de forma proporcional sin deformarse */
+    display: block;
+    transition: filter 0.3s ease; /* Transición suave al cambiar de tema */
+}
+
+/* Opcional: Si tu icono es oscuro y quieres que resalte en Modo Oscuro */
+body .custom-avatar-img {
+    filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.2));
+}
+
+/* Opcional: Ajuste de sombra para el icono en Modo Claro */
+body[data-theme="light"] .custom-avatar-img {
+    filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.1));
+}
+
+/* Contenedor del Interruptor de Tema Estilizado Apilado */
+.theme-switch-container { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-end; 
+    gap: 8px; 
+}
+
+.switch-row { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+/* Estilo del Botón Switch Redondo Interactiva */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input { 
+    opacity: 0; width: 0; height: 0; 
+}
+
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #64748b; transition: .3s;
+}
+
+.slider:before {
+    position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+    background-color: white; transition: .3s;
+}
+
+input:checked + .slider { background-color: var(--primary-blue); }
+input:checked + .slider:before { transform: translateX(20px); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+.btn-logout { 
+    font-size: 0.85rem; 
+    color: var(--text-muted); 
+    text-decoration: none; 
+    border-top: 1px solid var(--border-color); 
+    padding-top: 4px; 
+    margin-top: 2px; 
+    width: 100%; 
+    text-align: right;
+    transition: color 0.2s;
+}
+.btn-logout:hover { color: var(--danger); }
+
+/* --- GRID PRINCIPAL REESTRUCTURADO (BENTO GRID MATRIZ CON MAPA DE ÁREAS) --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Fuerza 3 columnas exactamente proporcionales */
+    gap: 20px;
+    grid-template-areas: 
+        "metrics live form"
+        "sounds sounds sounds"
+        "breathing breathing breathing"
+        "analytics analytics analytics"
+        "history history history";
+}
+
+/* Asignación estricta de áreas para evitar colapsos y deformaciones */
+.bento-metrics-group { grid-area: metrics; display: flex; flex-direction: column; gap: 15px; }
+.card-live          { grid-area: live; }
+.card-manual-form   { grid-area: form; }
+.card-sleep-sounds  { grid-area: sounds; width: 100%; }
+.card-breathing     { grid-area: breathing; width: 100%; }
+.card-analytics     { grid-area: analytics; }
+.card-table-history { grid-area: history; }
+
+/* Tarjetas Base */
+.card {
+    background-color: var(--bg-card);
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px var(--shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+}
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+
+/* --- SOLUCIÓN DE DESBORDAMIENTO (image_f32a61.png Corregido) --- */
+.form-row { 
+    display: flex; 
+    gap: 16px; 
+    margin-bottom: 12px; 
+    width: 100%;            /* Forzamos a respetar el contenedor padre */
+    flex-wrap: wrap;        /* Si colapsa el espacio, los inputs bajan de fila sin romperse */
+}
+
+.form-group { 
+    flex: 1; 
+    min-width: 140px;       /* Evita compresión extrema e ilegible */
+    display: flex; 
+    flex-direction: column; 
+    gap: 6px; 
+}
+
+input, select {
+    background: var(--input-bg); 
+    border: 1px solid var(--border-color); 
+    color: var(--text-main);
+    padding: 12px 14px; 
+    border-radius: 10px; 
+    font-family: inherit; 
+    font-size: 0.9rem; 
+    outline: none;
+    width: 100%;            /* El elástico mide el 100% de su espacio asignado */
+    box-sizing: border-box; /* El padding no deforma las proporciones */
+    transition: background-color 0.3s, border-color 0.2s, color 0.3s;
+}
+
+input:focus, select:focus { border-color: var(--primary-blue); }
+
+/* --- BLOQUE DE MÉTRICAS (Estilo image_f33e1c.png) --- */
+.metric-card {
+    background: var(--bg-metric);
+    padding: 16px; 
+    border-radius: 16px;
+    display: flex; 
+    flex-direction: column; 
+    gap: 4px;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.main-hours { 
+    background: rgba(56, 189, 248, 0.08); 
+    border: 1px solid var(--primary-blue); 
+    padding: 24px; 
+}
+
+.main-hours h2 { font-size: 2.2rem; color: var(--primary-blue); font-weight: 700; }
+.sub-metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.metric-card p { font-size: 1.2rem; font-weight: 600; }
+.metric-title { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
+
+/* --- BOTONES Y COMPONENTES --- */
+.btn-submit-form {
+    background: var(--slate-button); 
+    color: white; 
+    border: none; 
+    width: 100%;
+    padding: 12px; 
+    border-radius: 10px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    font-size: 0.95rem; 
+    margin-top: 5px;
+    transition: opacity 0.2s;
+}
+.btn-submit-form:hover { opacity: 0.9; }
+
+.btn-sleep-action {
+    background: var(--slate-button); 
+    color: white; 
+    border: none; 
+    padding: 12px;
+    border-radius: 10px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    flex: 2;
+}
+
+.btn-secondary { 
+    background: transparent; 
+    border: 1px solid var(--border-color); 
+    color: var(--text-muted); 
+    padding: 12px; 
+    border-radius: 10px; 
+    cursor: pointer; 
+    flex: 1; 
+}
+
+.live-controls { display: flex; gap: 10px; margin-top: 15px; }
+
+/* --- INTERFAZ DE GRÁFICOS Y CANVAS --- */
+.chart-circular-container { position: relative; width: 160px; height: 160px; margin: 10px auto; }
+.chart-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.chart-overlay span { font-size: 1.8rem; font-weight: 700; color: var(--primary-blue); display: block; }
+.chart-overlay small { font-size: 0.7rem; color: var(--text-muted); }
+.chart-container-line { height: 240px; position: relative; }
+
+/* --- TABLA E HISTORIAL DE ACCIONES (Doble confirmación en celda) --- */
+.table-responsive { overflow-x: auto; margin-top: 10px; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 14px 10px; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; transition: border-color 0.3s;}
+th { color: var(--text-muted); font-weight: 500; }
+
+.badge-status { background: var(--bg-metric); padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; border: 1px solid var(--border-color);}
+.bg-green { background: #065f46; color: #34d399; }
+.bg-amber { background: #78350f; color: #fbbf24; }
+.bg-red { background-color: #7f1d1d; color: #f87171; }
+
+.btn-delete { 
+    background: none; 
+    border: none; 
+    color: var(--danger); 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 1.1rem; 
+    transition: all 0.2s ease; 
+}
+
+.alert-error { 
+    background: rgba(239, 68, 68, 0.15); 
+    color: #f87171; 
+    border: 1px solid rgba(239, 68, 68, 0.25); 
+    padding: 10px; 
+    border-radius: 8px; 
+    margin-bottom: 15px; 
+    font-size: 0.85rem;
+}
+
+/* --- TARJETA DE SONIDOS DE SUEÑO (ESTILO INTERNO HORIZONTAL CORREGIDO) --- */
+.sounds-bento-container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 5px 0;
+    width: 100%;
+}
+
+/* Botón redondo inspirado en los círculos de la columna central de la imagen */
+.sound-circular-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--bg-main);
+    border: 2px solid var(--border-color);
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0; /* Impide que el círculo se comprima lateralmente */
+}
+
+.sound-circular-btn:hover {
+    border-color: var(--primary-blue);
+    transform: scale(1.05);
+}
+
+.sound-icon {
+    font-size: 1.8rem;
+    z-index: 2;
+}
+
+/* Animación de onda expansiva cuando el sonido está reproduciéndose */
+.sound-circular-btn.playing {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+
+.sound-circular-btn.playing .sound-wave-indicator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--primary-blue);
+    animation: pulseWave 2s infinite ease-out;
+    opacity: 0;
+    z-index: 1;
+}
+
+@keyframes pulseWave {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.3); opacity: 0; }
+}
+
+.sound-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sound-details h4 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.sound-details p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.volume-control label {
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+.volume-control input[type="range"] {
+    flex: 1;
+    accent-color: var(--primary-blue);
+    cursor: pointer;
+    padding: 0;
+    height: 6px;
+}
+
+/* --- TARJETA DE RESPIRACIÓN 4-7-8 (FILA COMPLETA HORIZONTAL OPTIMIZADA) --- */
+.breathing-bento-container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 5px 0;
+    width: 100%;
+}
+
+/* Contenedor del anillo visual */
+.breathing-circle-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0; /* Mantiene la proporción geométrica perfecta */
+}
+
+.breathing-circle {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: rgba(56, 189, 248, 0.15);
+    border: 3px solid var(--primary-blue);
+    transition: all 0.5s ease;
+}
+
+.breathing-action-text {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.breathing-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.breathing-details h4 { font-size: 1.1rem; color: var(--text-main); }
+.breathing-details p { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Limitar el botón elástico en la vista extendida horizontal */
+.breathing-controls {
+    max-width: 200px;
+}
+
+/* --- ESTADOS DINÁMICOS ANIMADOS MEDIANTE JS --- */
+.breathing-circle.inhale {
+    transform: scale(1.35);
+    background-color: rgba(56, 189, 248, 0.4);
+    transition: transform 4s linear, background-color 4s linear;
+}
+
+.breathing-circle.hold {
+    transform: scale(1.35);
+    background-color: rgba(251, 191, 36, 0.3); 
+    border-color: #fbbf24;
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+.breathing-circle.exhale {
+    transform: scale(0.9);
+    background-color: rgba(239, 68, 68, 0.15);
+    border-color: var(--danger);
+    transition: transform 8s linear, background-color 8s linear, border-color 8s linear;
+}
+
+/* ==========================================================================
+   RESPONSIVIDAD Y ADAPTACIÓN MULTIPANTALLA COMPLETAMENTE CORREGIDA
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Colapsa la matriz asimétrica a formato vertical unificado */
+        grid-template-areas: 
+            "metrics"
+            "live"
+            "form"
+            "sounds"
+            "breathing"
+            "analytics"
+            "history";
+    }
+    .sounds-bento-container, .breathing-bento-container {
+        flex-direction: column; /* Apila el contenido de forma clara en smartphones */
+        text-align: center;
+    }
+    .breathing-controls {
+        max-width: 100%;
+    }
+    
+}
+
+/* ==========================================================================
+   ESTILOS MODO HIPNOSIS INMERSIVA (Inspirado en image_f23e7c.png)
+   ========================================================================== */
+
+/* Botón orgánico morado flotante */
+.btn-organic-sleep {
+    background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-top: 5px;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-organic-sleep:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+    background: linear-gradient(135deg, #b55fe6 0%, #4f46e5 100%);
+}
+
+/* Capa de fondo estilo SweetAlert completo */
+.sweet-sleep-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(5, 7, 13, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.sweet-sleep-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Ventana emergente SweetAlert Premium */
+.sweet-sleep-alert {
+    background: rgba(22, 31, 48, 0.7);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 28px;
+    padding: 40px;
+    width: 90%;
+    max-width: 460px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(168, 85, 247, 0.1);
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sweet-sleep-overlay.active .sweet-sleep-alert {
+    transform: scale(1);
+}
+
+.sweet-close-btn {
+    position: absolute; top: 20px; right: 20px;
+    background: transparent; border: none; color: var(--text-muted);
+    font-size: 1.2rem; cursor: pointer; transition: color 0.2s;
+}
+.sweet-close-btn:hover { color: white; }
+
+.purple-glow-text {
+    color: #e9d5ff;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+/* Esfera e indicador hiper-orgánico de image_f23e7c.png */
+.organic-hypno-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    margin: 30px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hypno-main-circle {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 5;
+    transition: all 0.5s ease;
+}
+
+.hypno-main-circle span {
+    color: white; font-weight: 800; font-size: 1.3rem; letter-spacing: 2px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Capa trasera distorsionada que emula la forma de nubes de la imagen */
+.hypno-blob-bg {
+    position: absolute;
+    width: 160px; height: 160px;
+    border-radius: 43% 57% 61% 39% / 47% 43% 57% 53%; /* Curvatura orgánica irregular */
+    background: rgba(168, 85, 247, 0.3);
+    filter: blur(10px);
+    z-index: 2;
+    animation: waveBlob 6s infinite ease-in-out;
+    transition: all 0.5s ease;
+}
+
+@keyframes waveBlob {
+    0%, 100% { border-radius: 43% 57% 61% 39% / 47% 43% 57% 53%; transform: rotate(0deg) scale(1); }
+    50% { border-radius: 60% 40% 40% 60% / 50% 60% 40% 50%; transform: rotate(180deg) scale(1.15); filter: blur(4px); }
+}
+
+/* Botón de control gris/púrpura del modal */
+.btn-hypno-start {
+    background: #475569; color: white; border: none; width: 100%;
+    padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer;
+    font-size: 1rem; transition: background 0.2s; margin-top: 15px;
+}
+.btn-hypno-start:hover { background: #334155; }
+
+/* --- DINÁMICAS MECÁNICAS INMERSIVAS MEDIANTE JAVASCRIPT --- */
+.hypno-main-circle.inhale-mode {
+    transform: scale(1.45);
+    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    box-shadow: 0 0 50px rgba(6, 182, 212, 0.8);
+    transition: transform 4s linear, background 4s linear;
+}
+.hypno-blob-bg.inhale-mode {
+    background: rgba(6, 182, 212, 0.4);
+    transform: scale(1.5);
+    transition: transform 4s linear, background 4s linear;
+}
+
+.hypno-main-circle.hold-mode {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    box-shadow: 0 0 50px rgba(245, 158, 11, 0.7);
+    transition: background 0.5s ease;
+}
+.hypno-blob-bg.hold-mode {
+    background: rgba(245, 158, 11, 0.3);
+    transition: background 0.5s ease;
+}
+
+.hypno-main-circle.exhale-mode {
+    transform: scale(0.85);
+    background: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+    box-shadow: 0 0 40px rgba(236, 72, 153, 0.5);
+    transition: transform 8s linear, background 8s linear;
+}
+.hypno-blob-bg.exhale-mode {
+    background: rgba(236, 72, 153, 0.2);
+    transform: scale(0.9);
+    transition: transform 8s linear, background 8s linear;
+}
+
+/* --- BOTÓN SUTIL DE REGRESO AL HUB PRINCIPAL --- */
+.btn-back-hub {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease, transform 0.1s ease;
+}
+
+/* Efectos interactivos al pasar el mouse */
+.btn-back-hub:hover {
+    color: var(--text-main);
+    border-color: var(--text-muted);
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+body[data-theme="light"] .btn-back-hub:hover {
+    background-color: rgba(15, 23, 42, 0.02);
+}
+
+.btn-back-hub:active {
+    transform: scale(0.98);
+}
