@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlashLingo - Práctica</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Estilos específicos para la vista de práctica */
+        .practice-header {
+            display: flex;
+            align-items: center;
+            padding: 24px;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .practice-header-info {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .progress-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+        .practice-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .flashcard {
+            max-width: 600px;
+            width: 100%;
+            min-height: 350px;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .card-prompt {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+        /* Opciones de selección múltiple */
+        .options-grid {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .option-btn {
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 14px;
+            border-radius: var(--btn-radius);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .option-btn:hover {
+            border-color: var(--accent-color);
+        }
+        .option-btn.selected {
+            background-color: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+        }
+        /* Feedback de la respuesta */
+        .feedback-area {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            display: none;
+            font-weight: bold;
+        }
+        .feedback-correct {
+            background-color: rgba(76, 209, 55, 0.1);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+        .feedback-incorrect {
+            background-color: rgba(232, 65, 24, 0.1);
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+        .correct-answer-text {
+            display: block;
+            margin-top: 8px;
+            color: var(--text-primary);
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="practice-header">
+        <button id="btn-back" class="btn btn-secondary" style="width: auto; padding: 10px 16px;">⬅ Volver</button>
+        <div class="practice-header-info">
+            <h2 id="module-title">Cargando...</h2>
+            <div id="progress-text" class="progress-text">Tarjeta 0 de 0</div>
+        </div>
+        <div style="width: 80px;"></div> 
+    </header>
+
+    <main class="practice-container">
+        <div id="flashcard" class="bento-card flashcard">
+            <div id="card-content">
+                <p>Cargando tarjetas...</p>
+            </div>
+            
+            <div id="feedback" class="feedback-area"></div>
+
+            <div style="margin-top: auto; padding-top: 24px;">
+                <button id="btn-action" class="btn btn-primary" style="display: none;">Comprobar</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="assets/js/db.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/engine.js"></script>
+</body>
+</html>
