@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Credenciales estáticas para desarrollo rápido con sesión PHP
-    if (strtolower($username) === 'eduardo' && strtolower($password) === 'edu') {
+    if (strtolower($username) === 'admin' && strtolower($password) === 'azucar') {
         $_SESSION['user'] = $username;
         header("Location: dashboard.php");
         exit;
@@ -55,6 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <br>
             <button type="submit" class="btn-primary">Entrar al Panel</button>
+            <br>
+            <!-- Botón elástico para regresar al Hub Central -->
+            <a href="../index.php" class="btn-back-hub">Volver al Panel Central</a>
         </form>
     </div>
 </body>
