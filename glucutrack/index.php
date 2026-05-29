@@ -46,12 +46,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="" method="POST">
             <div class="form-group">
                 <label for="username">Usuario</label>
-                <input type="text" id="username" name="username" required placeholder="">
+                <input type="text" id="username" name="username" required placeholder="admin">
             </div>
              <br>
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" required placeholder="">
+                <input type="password" id="password" name="password" required placeholder="azucar">
             </div>
             <br>
             <button type="submit" class="btn-primary">Entrar al Panel</button>
