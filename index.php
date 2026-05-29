@@ -41,8 +41,8 @@ $_SESSION['main_user'] = "k0z159";
             
             <!-- TARJETA MAESTRA: Bienvenida y Resumen Técnico -->
             <section class="hub-card card-welcome">
-                <h2>Ecosistema Digital</h2>
-                <p>Bienvenido, <strong>MzkoVga</strong> Stack:</p>
+                <h2>Mis Apps</h2>
+                <p>Bienvenido<strong></strong>:</p>
                 <div class="tech-stack-badges">
                     <span class="badge">JAVASCRIPT</span>    
                     <span class="badge">PHP NATIVO</span>
@@ -85,6 +85,18 @@ $_SESSION['main_user'] = "k0z159";
                 <div class="app-card-body">
                     <h3>SleepTrack</h3>
                     <p>Análisis de ciclos de sueño, reproductor ambiental y relajación interactiva 4-7-8.</p>
+                </div>
+            </a>
+
+            <!-- APLICACIÓN 4: Flashlingo -->
+            <a href="flashlingo/login.html" class="hub-card app-launcher-card sleep-theme">
+                <div class="app-card-header">
+                    <span class="app-icon">📚</span>
+                    <span class="launcher-arrow">➔</span>
+                </div>
+                <div class="app-card-body">
+                    <h3>Flashlingo</h3>
+                    <p>App para practicar ingles basico</p>
                 </div>
             </a>
 
