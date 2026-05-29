@@ -50,11 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="" method="POST">
             <div class="form-group">
                 <label for="username">Usuario</label>
-                <input type="text" id="username" name="username" required placeholder="Ej. mama">
+                <input type="text" id="username" name="username" required placeholder="mama">
             </div>
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" required placeholder="••••••••">
+                <input type="password" id="password" name="password" required placeholder="baby">
             </div>
             <button type="submit" class="btn-primary-gradient">Entrar al Tracker</button>
             <br>
